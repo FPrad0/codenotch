@@ -4,7 +4,7 @@ O Codenotch ainda não publica um instalador Linux nas releases. Na revisão de 
 
 O CI do projeto compila e executa os testes Rust no Ubuntu, mas não testa a janela em um desktop gráfico. Considere o suporte Linux experimental.
 
-## Pré-requisitos no Ubuntu ou Debian
+## Pré-requisitos no Ubuntu, Linux Mint ou Debian
 
 Instale as bibliotecas necessárias para compilar o WebView e a bandeja:
 
