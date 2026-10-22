@@ -25,6 +25,8 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 rustup default stable
 ```
 
+Para gerar pacotes `.deb` e AppImage, também é necessário ter Node.js com `npm`/`npx`.
+
 ## Compilar e iniciar
 
 Clone o repositório e compile o port Rust/Tauri:
@@ -61,4 +63,24 @@ Os dados locais seguem os diretórios XDG (por padrão, `~/.config/codenotch`). 
 
 ## Pacotes Linux
 
-A configuração Tauri em `windows/codenotch/tauri.linux.conf.json` declara os formatos `.deb` e AppImage. Porém, a release atual não publica esses pacotes, e este fluxo de empacotamento ainda não é documentado como uma instalação oficial. Use a compilação e execução pelo script acima até que o projeto publique artefatos Linux testados.
+A release atual não publica pacotes Linux prontos, mas a configuração Tauri em `windows/codenotch/tauri.linux.conf.json` gera `.deb` e AppImage. A partir da raiz do clone:
+
+```sh
+cd windows/codenotch
+npx --yes @tauri-apps/cli@2.11.4 build --config tauri.linux.conf.json -- --locked
+```
+
+Os arquivos aparecem em `../target/release/bundle/deb/` e `../target/release/bundle/appimage/`. Para instalar o `.deb` gerado, use o nome exibido nessa pasta (na revisão `v1.23.0`):
+
+```sh
+sudo apt install ../target/release/bundle/deb/Codenotch_1.23.0_amd64.deb
+```
+
+Para executar o AppImage sem instalá-lo no sistema:
+
+```sh
+chmod +x ../target/release/bundle/appimage/Codenotch_1.23.0_amd64.AppImage
+../target/release/bundle/appimage/Codenotch_1.23.0_amd64.AppImage
+```
+
+Validação registrada em 22/10/2026 no Linux Mint 22.3: `cargo build --release --locked -p codenotch`, geração dos dois pacotes pelo Tauri e instalação do `.deb` pelo `apt` concluíram com sucesso. A interface gráfica dessa compilação ainda não foi validada visualmente.
