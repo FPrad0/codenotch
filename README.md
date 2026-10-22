@@ -59,6 +59,12 @@ The installer is not code-signed, so the first time it runs SmartScreen says *Wi
 your PC*. Choose **More info**, then **Run anyway**. Every Windows change also leaves an
 installer on its [Windows Package run](../../actions/workflows/windows-package.yml).
 
+## Linux (experimental)
+
+There is no Linux installer in the latest release. The Rust/Tauri app under [`windows/`](windows/README.md)
+can be built from source and run on Linux; see the [Portuguese installation guide](docs/linux-installation-pt-BR.md)
+for Ubuntu/Debian prerequisites, build steps and current limitations.
+
 ## Connect your phone
 
 The Codenotch phone app (iOS and Android) can show the same usage
