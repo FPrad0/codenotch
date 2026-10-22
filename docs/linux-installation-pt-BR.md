@@ -1,8 +1,39 @@
 # Codenotch no Linux (experimental)
 
-O Codenotch ainda não publica um instalador Linux nas releases. Na revisão de 22/10/2026, a release `v1.23.0` (commit `9e7cd3d`) oferecia o app macOS (`.dmg`) e o instalador Windows (`.exe`), sem pacote Linux. O código Linux disponível fica no port Rust/Tauri de `windows/`, e pode ser compilado a partir do código-fonte.
+O Codenotch ainda não publica um instalador Linux nas releases. Na revisão de 22/10/2026, a release `v1.23.0` (commit `9e7cd3d`) oferecia o app macOS (`.dmg`) e o instalador Windows (`.exe`), sem pacote Linux. Este fork preserva duas opções Linux: o port Rust/Tauri de `windows/` e um snapshot do port Python 1.17.0 que estava em uso neste computador, em [`linux/python-port/`](../linux/python-port/README.md).
 
 O CI do projeto compila e executa os testes Rust no Ubuntu, mas não testa a janela em um desktop gráfico. Considere o suporte Linux experimental.
+
+## Port Linux atualmente utilizado (Python 1.17.0)
+
+Este é o port ativo neste computador na data de 22/10/2026, com as personalizações locais de interface preservadas. Para instalar as dependências no Ubuntu 24.04 ou Linux Mint 22.x:
+
+```sh
+sudo apt update
+sudo apt install python3 python3-gi python3-gi-cairo python3-requests \
+                 gir1.2-gtk-3.0 gir1.2-webkit2-4.1 \
+                 gir1.2-ayatanaappindicator3-0.1
+```
+
+No Linux Mint 21/Ubuntu 22.04 ou em distribuições que não oferecem WebKitGTK 4.1, substitua `gir1.2-webkit2-4.1` por `gir1.2-webkit2-4.0`. O AppIndicator é opcional; sem ele, a janela principal ainda pode abrir, mas a bandeja pode não aparecer.
+
+Clone o fork e inicie o snapshot pelo launcher incluído:
+
+```sh
+git clone https://github.com/FPrad0/codenotch.git
+cd codenotch
+python3 linux/python-port/bin/codenotch
+```
+
+O autodiagnóstico não abre a interface:
+
+```sh
+python3 linux/python-port/bin/codenotch doctor
+```
+
+O port usa GTK 3, WebKitGTK e X11; em sessões Wayland ele depende do XWayland, e o posicionamento da notch pode variar conforme o compositor. O código de hooks e autostart está preservado: `install-hooks` e `autostart on` são opcionais e alteram arquivos do usuário. Não execute duas versões do Codenotch ao mesmo tempo com a porta padrão `48666`, pois o serviço local de hooks pode conflitar.
+
+O snapshot inclui somente o código, os recursos de interface e os launchers. Configurações, credenciais, bancos de dados, cache e arquivos de log locais não são versionados.
 
 ## Pré-requisitos no Ubuntu, Linux Mint ou Debian
 
