@@ -63,7 +63,7 @@ installer on its [Windows Package run](../../actions/workflows/windows-package.y
 
 There is no Linux installer in the latest release. The Rust/Tauri app under [`windows/`](windows/README.md)
 can be built from source and run on Linux; see the [Portuguese installation guide](docs/linux-installation-pt-BR.md)
-for Ubuntu/Debian prerequisites, build steps and current limitations.
+for Ubuntu, Linux Mint or Debian prerequisites, build steps and current limitations.
 
 ## Connect your phone
 
