@@ -63,7 +63,9 @@ installer on its [Windows Package run](../../actions/workflows/windows-package.y
 
 There is no Linux installer in the latest release. The Rust/Tauri app under [`windows/`](windows/README.md)
 can be built from source and run on Linux; see the [Portuguese installation guide](docs/linux-installation-pt-BR.md)
-for Ubuntu, Linux Mint or Debian prerequisites, build steps and current limitations.
+for Ubuntu, Linux Mint or Debian prerequisites, build steps and current limitations. The fork also preserves
+the Linux Python port currently in use (v1.17.0), including its local UI customizations, in
+[`linux/python-port/`](linux/python-port/README.md); the same guide explains how to install and run it.
 
 ## Connect your phone
 
